@@ -1,0 +1,11 @@
+name: dev_robupy
+
+dependencies:
+  - python=3.6
+  - numpy
+  - pandas
+  - statsmodels
+  - pytest
+  - pytest-xdist
+  - scipy
+  - flake8
