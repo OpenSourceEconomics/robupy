@@ -1,4 +1,3 @@
-from functools import partial
 import numpy as np
 
 from robupy.auxiliary import get_entropic_risk_measure
@@ -8,7 +7,7 @@ from robupy.tests.auxiliary import get_request
 
 def test_1():
     """This test establishes that the calculation of the certainty equivalent is properly done."""
-    for _ in range(5000):
+    for _ in range(50):
 
         _, v, q, beta, gamma, _ = get_request()
 
