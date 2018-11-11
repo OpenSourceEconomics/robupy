@@ -1,4 +1,4 @@
-name: dev_robupy
+name: robupy
 
 dependencies:
   - python=3.6
