@@ -49,7 +49,7 @@ def calculate_p(v, q, lambda_):
     return p
 
 
-# @numba.jit(nopython=True)
+@numba.jit(nopython=True)
 def get_worst_case_probs(v, q, beta):
     """This function return the worst case measure."""
     checks_get_worst_in(v, q, beta)
@@ -74,7 +74,7 @@ def get_worst_case_probs(v, q, beta):
     return p
 
 
-# @numba.jit(nopython=True)
+@numba.jit(nopython=True)
 def get_worst_case_outcome(v, q, beta, is_cost=True):
     """This function calculates the worst case outcome."""
     checks_get_worst_in(v, q, beta)
