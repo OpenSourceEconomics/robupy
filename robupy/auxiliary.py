@@ -1,8 +1,9 @@
 """This module contains auxiliary functions for the robust optimization problem."""
 from functools import partial
 
-from scipy.optimize import fminbound
+from robupy.minimize import fminbound_numba
 import numpy as np
+import numba
 
 from robupy.config import SMALL_FLOAT
 from robupy.config import HUGE_FLOAT
@@ -20,12 +21,13 @@ from robupy.checks import (
 )
 
 
-def criterion_full(v, q, beta, lambda_):
+@numba.jit(nopython=True)
+def criterion_full(lambda_, v, q, beta):
     """This is the criterion function for ..."""
     checks_criterion_full_in(v, q, beta, lambda_)
 
     # We want to rule out an infinite logarithm.
-    arg_ = np.clip(np.sum(q * np.exp(v / lambda_)), EPS_FLOAT, None)
+    arg_ = np.min(np.sum(q * np.exp(v / lambda_)), EPS_FLOAT)
 
     rslt = lambda_ * np.log(arg_) + lambda_ * beta
 
@@ -62,11 +64,8 @@ def get_worst_case_probs(v, q, beta):
     )
     lower = EPS_FLOAT
 
-    criterion = partial(criterion_full, v_scaled, q, beta)
-
-    x, func_val, status, func_eval = fminbound(
-        criterion, lower, upper, xtol=EPS_FLOAT, full_output=True
-    )
+    x, func_val, status, func_eval = fminbound_numba(
+        criterion_full, lower, upper, args=(v_scaled, q, beta), xatol=EPS_FLOAT)
     p = calculate_p(v_scaled, q, x)
 
     checks_get_worst_case_out(p, q, beta, status)
@@ -122,18 +121,17 @@ def get_entropic_risk_measure(v, q, gamma):
 def get_multiplier_evaluation(v, q, theta):
     """This function returns the evaluation based on the multiplier preferences."""
 
-    def criterion_soft(v, q, gamma, epsilon):
+    def criterion_soft(epsilon, v, q, gamma):
         crit_val = (
-            -get_worst_case_outcome(v, q, epsilon / gamma, is_cost=False) - epsilon
+            - get_worst_case_outcome(v, q, epsilon / gamma, is_cost=False) - epsilon
         )
         return -crit_val
 
     lower, upper = 0.00, MAX_FLOAT
 
-    criterion = partial(criterion_soft, v, q, theta)
-    rslt = fminbound(
-        criterion, lower, upper, xtol=EPS_FLOAT, maxfun=MAX_INT, full_output=True
-    )
+    rslt = fminbound_numba(
+        criterion_soft, lower, upper, args=(v, q, theta), xatol=EPS_FLOAT,
+        maxfun=MAX_INT)
     np.testing.assert_equal(rslt[2] == 0, True)
 
     return rslt[1]

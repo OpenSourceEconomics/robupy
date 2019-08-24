@@ -4,6 +4,7 @@ import numba
 
 from robupy.config import SMALL_FLOAT
 
+
 @numba.jit(nopython=True)
 def checks_criterion_full_in(v, q, beta, lambda_):
     """This function hosts all checks."""
@@ -11,6 +12,7 @@ def checks_criterion_full_in(v, q, beta, lambda_):
     check_lambda(lambda_)
     check_p(q)
     check_v(v)
+
 
 @numba.jit(nopython=True)
 def checks_criterion_full_out(rslt):
@@ -20,11 +22,13 @@ def checks_criterion_full_out(rslt):
     if not (np.isfinite(rslt) or rslt == np.inf):
         raise AssertionError
 
+
 @numba.jit(nopython=True)
 def checks_calculate_p_in(v, q, lambda_):
     check_lambda(lambda_)
     check_p(q)
     check_v(v)
+
 
 @numba.jit(nopython=True)
 def checks_calculate_p_out(p):
@@ -37,6 +41,7 @@ def checks_get_worst_in(v, q, beta):
     check_p(q)
     check_beta(beta)
 
+
 @numba.jit(nopython=True)
 def checks_get_worst_case_out(p, q, beta, status):
     check_p(q)
@@ -44,6 +49,7 @@ def checks_get_worst_case_out(p, q, beta, status):
     check_beta(beta)
     if status != 0:
         raise AssertionError
+
 
 @numba.jit(nopython=True)
 def checks_get_worst_case_outcome_out(v, v_new):
