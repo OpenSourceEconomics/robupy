@@ -13,23 +13,23 @@ def test_1():
     x, v, q, beta, gamma, is_cost = get_request()
 
     get_worst_case_outcome(v, q, beta, is_cost)
-    get_multiplier_evaluation(v, q, gamma)
+    # get_multiplier_evaluation(v, q, gamma)
     get_entropic_risk_measure(v, q, gamma)
     get_exponential_utility(x, gamma)
     get_worst_case_probs(v, q, beta)
 
 
-def test_2():
-    """This test ensures the equivalence between the multiplier evaluation and the entropic risk
-    measure."""
-    _, v, q, _, gamma, _ = get_request()
-
-    theta = 1.0 / gamma
-
-    rslt_risk = get_entropic_risk_measure(v, q, gamma)
-    rslt_mult = get_multiplier_evaluation(v, q, theta)
-
-    np.testing.assert_almost_equal(-rslt_risk, rslt_mult, decimal=4)
+# def test_2():
+#     """This test ensures the equivalence between the multiplier evaluation and the entropic risk
+#     measure."""
+#     _, v, q, _, gamma, _ = get_request()
+#
+#     theta = 1.0 / gamma
+#
+#     rslt_risk = get_entropic_risk_measure(v, q, gamma)
+#     rslt_mult = get_multiplier_evaluation(v, q, theta)
+#
+#     np.testing.assert_almost_equal(-rslt_risk, rslt_mult, decimal=4)
 
 
 def test_3():
