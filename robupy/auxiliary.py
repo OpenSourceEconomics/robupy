@@ -50,16 +50,24 @@ def calculate_p(v, q, lambda_):
 
 
 @numba.jit(nopython=True)
-def get_worst_case_probs(v, q, beta):
+def get_worst_case_probs(v, q, beta, is_cost=True):
     """This function return the worst case measure."""
     checks_get_worst_in(v, q, beta)
 
     if beta == 0.0:
         return q.copy()
 
-    # We scale the value function to avoid too large evaluations of the exponential function in
+    # We can use this function to determine the worst case if we pass in costs or if
+    # we pass in utility.
+    if not is_cost:
+        v_intern = -v
+    else:
+        v_intern = v
+
+    # We scale the value function to avoid too large evaluations of the exponential
+    # function in
     # the calculate_p() function.
-    v_scaled = v / np.max(np.abs(v))
+    v_scaled = v_intern / np.max(np.abs(v_intern))
 
     upper = np.maximum((np.max(v_scaled) - np.dot(q, v_scaled)) / beta, 2 * EPS_FLOAT)
     lower = EPS_FLOAT
@@ -79,13 +87,6 @@ def get_worst_case_outcome(v, q, beta, is_cost=True):
     """This function calculates the worst case outcome."""
     checks_get_worst_in(v, q, beta)
 
-    # We can use this function to determine the worst case if we pass in costs or if
-    # we pass in utility.
-    if not is_cost:
-        v_intern = -v
-    else:
-        v_intern = v
-
     # We want to handle two cases explicitly. First we deal with the case that there
     # is no ambiguity in the transition probabilities. Second, we look at the
     # case where the all mass assigned to the worst-case realization is inside the
@@ -98,7 +99,7 @@ def get_worst_case_outcome(v, q, beta, is_cost=True):
         else:
             return np.min(v)
 
-    p = get_worst_case_probs(v_intern, q, beta)
+    p = get_worst_case_probs(v, q, beta, is_cost=is_cost)
     v_new = np.dot(p, v)
 
     checks_get_worst_case_outcome_out(v, v_new)

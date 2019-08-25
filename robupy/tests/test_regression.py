@@ -61,7 +61,7 @@ def test_5():
     )
 
 
-# def test_5():
+# def test_6():
 #     x, v, q, beta, gamma, is_cost = get_request()
 # assert_array_almost_equal(
 #     pre_numba_get_multiplier_evaluation(v, q, gamma),
