@@ -1,15 +1,11 @@
 """This module contains auxiliary functions for the robust optimization problem."""
-from functools import partial
 
 from robupy.minimize import fminbound_numba
 import numpy as np
 import numba
 
-from robupy.config import SMALL_FLOAT
-from robupy.config import HUGE_FLOAT
 from robupy.config import EPS_FLOAT
 from robupy.config import MAX_FLOAT
-from robupy.config import MAX_INT
 from robupy.checks import (
     checks_criterion_full_in,
     checks_criterion_full_out,
