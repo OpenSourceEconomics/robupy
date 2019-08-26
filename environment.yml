@@ -9,3 +9,7 @@ dependencies:
   - pytest-xdist
   - scipy
   - flake8
+  - numba
+  - pip
+  - pip:
+      - black

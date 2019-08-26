@@ -1,51 +1,91 @@
 """This module contains all checks for the package to improve readability."""
-from scipy.stats import entropy
 import numpy as np
+import numba
 
 from robupy.config import SMALL_FLOAT
 
 
-def checks(label, *args):
+@numba.jit(nopython=True)
+def checks_criterion_full_in(v, q, beta, lambda_):
     """This function hosts all checks."""
-    if label == 'criterion_full_in':
-        v, q, beta, lambda_ = args
-        np.testing.assert_equal(beta >= 0, True)
-        np.testing.assert_equal(lambda_ >= 0, True)
-        np.testing.assert_almost_equal(sum(q), 1)
-        np.testing.assert_equal(np.all(q > 0), True)
-        np.testing.assert_equal(np.all(np.isfinite(v)), True)
-    elif label == 'criterion_full_out':
-        rslt, = args
-        # We do encounter the case that the criterion function is infinite. However, this is not
-        # a problem, since it is only called in a minimization which discards this evaluation point.
-        np.testing.assert_equal(np.isfinite(rslt) or rslt == np.inf, True)
-    elif label == 'calculate_p_in':
-        v, q, lambda_ = args
-        np.testing.assert_equal(lambda_ >= 0, True)
-        np.testing.assert_almost_equal(sum(q), 1)
-        np.testing.assert_equal(np.all(q > 0), True)
-        np.testing.assert_equal(np.all(np.isfinite(v)), True)
-    elif label == 'calculate_p_out':
-        p, = args
-        np.testing.assert_equal(np.all(p >= 0.0), True)
-        np.testing.assert_almost_equal(sum(p), 1.0)
-    elif label in ['get_worst_case_in', 'get_worst_case_outcome_in']:
-        v, q, beta = args
-        np.testing.assert_equal(np.all(np.isfinite(v)), True)
-        np.testing.assert_almost_equal(sum(q), 1)
-        np.testing.assert_equal(np.all(q > 0), True)
-        np.testing.assert_equal(beta >= 0.0, True)
-    elif label == 'get_worst_case_out':
-        p, q, beta, rslt = args
-        np.testing.assert_almost_equal(sum(p), 1)
-        np.testing.assert_equal(np.all(p >= 0.0), True)
-        np.testing.assert_almost_equal(sum(q), 1)
-        np.testing.assert_equal(np.all(q > 0), True)
-        np.testing.assert_equal(beta >= 0.0, True)
-        np.testing.assert_equal(rslt[2] == 0, True)
-        np.testing.assert_equal(entropy(p, q) - beta < 0.0001, True)
-    elif label == 'get_worst_case_outcome_out':
-        v, q, beta, is_cost, rslt = args
-        np.testing.assert_equal(min(v) - SMALL_FLOAT <= rslt <= max(v) + SMALL_FLOAT, True)
-    else:
-        raise NotImplementedError
+    check_beta(beta)
+    check_lambda(lambda_)
+    check_p(q)
+    check_v(v)
+
+
+@numba.jit(nopython=True)
+def checks_criterion_full_out(rslt):
+    # We do encounter the case that the criterion function is infinite. However, this
+    # is not a problem, since it is only called in a minimization which discards this
+    # evaluation point.
+    if not (np.isfinite(rslt) or rslt == np.inf):
+        raise AssertionError
+
+
+@numba.jit(nopython=True)
+def checks_calculate_p_in(v, q, lambda_):
+    check_lambda(lambda_)
+    check_p(q)
+    check_v(v)
+
+
+@numba.jit(nopython=True)
+def checks_calculate_p_out(p):
+    check_p(p)
+
+
+@numba.jit(nopython=True)
+def checks_get_worst_in(v, q, beta):
+    check_v(v)
+    check_p(q)
+    check_beta(beta)
+
+
+@numba.jit(nopython=True)
+def checks_get_worst_case_out(p, q, beta, status):
+    check_p(q)
+    check_p(p)
+    check_beta(beta)
+    if status != 0:
+        raise AssertionError
+
+
+@numba.jit(nopython=True)
+def checks_get_worst_case_outcome_out(v, v_new):
+    if not ((np.min(v) - SMALL_FLOAT <= v_new) & (v_new <= max(v) + SMALL_FLOAT)):
+        raise AssertionError
+
+
+@numba.jit(nopython=True)
+def check_p(p):
+    if np.abs(np.sum(p) - 1) > 1e-08:
+        raise AssertionError
+    if not np.all(p >= 0.0):
+        raise AssertionError
+
+
+@numba.jit(nopython=True)
+def check_lambda(lambda_):
+    if lambda_ < 0:
+        raise AssertionError
+
+
+@numba.jit(nopython=True)
+def check_beta(beta):
+    if beta < 0:
+        raise AssertionError
+
+
+@numba.jit(nopython=True)
+def check_v(v):
+    if not np.all(np.isfinite(v)):
+        raise AssertionError
+
+
+@numba.jit(nopython=True)
+def check_kullback_leibler_entropy(p, q, beta, atol=0.0001):
+    if len(p) != len(q):
+        raise AssertionError
+    if np.sum(np.log(np.multiply(p, np.divide(p, q)))) - beta > atol:
+        raise AssertionError
