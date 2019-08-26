@@ -3,21 +3,9 @@ import numpy as np
 
 
 @numba.jit(nopython=True)
-def fminbound_numba(func, lower, upper, args=(),
-                    xatol=1e-5, maxfun=500):
+def fminbound_numba(func, lower, upper, args=(), xatol=1e-5, maxfun=500):
     """
-    Options
-    ------
-    maxiter : int
-        Maximum number of iterations to perform.
-    disp: int, optional
-        If non-zero, print messages.
-            0 : no message printing.
-            1 : non-convergence notification messages only.
-            2 : print a message on convergence too.
-            3 : print iteration results.
-    xatol : float
-        Absolute error in solution `xopt` acceptable for convergence.
+    This function minimizes func(x, *args) w.r.t. to the scalar x.
     """
     if lower > upper:
         raise ValueError("The lower bound exceeds the upper bound.")
