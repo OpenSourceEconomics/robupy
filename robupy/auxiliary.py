@@ -24,7 +24,7 @@ from robupy.checks import (
 @numba.jit(nopython=True)
 def criterion_full(lambda_, v, q, beta):
     """This is the criterion function for ..."""
-    checks_criterion_full_in(v, q, beta, lambda_)
+    checks_criterion_full_in(lambda_)
 
     # We want to rule out an infinite logarithm.
     arg_ = np.maximum(np.sum(q * np.exp(v / lambda_)), EPS_FLOAT)
