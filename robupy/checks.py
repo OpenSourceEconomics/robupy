@@ -6,12 +6,9 @@ from robupy.config import SMALL_FLOAT
 
 
 @numba.jit(nopython=True)
-def checks_criterion_full_in(v, q, beta, lambda_):
+def checks_criterion_full_in(lambda_):
     """This function hosts all checks."""
-    check_beta(beta)
     check_lambda(lambda_)
-    check_p(q)
-    check_v(v)
 
 
 @numba.jit(nopython=True)
