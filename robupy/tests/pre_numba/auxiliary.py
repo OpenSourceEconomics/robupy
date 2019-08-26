@@ -84,7 +84,7 @@ def pre_numba_get_worst_case_outcome(v, q, beta, is_cost=True):
         else:
             return min(v)
 
-    p = pre_numba_get_worst_case_probs(v, q, beta)
+    p = pre_numba_get_worst_case_probs(v, q, beta, is_cost)
     rslt = np.matmul(p, v)
 
     pre_numba_checks('get_worst_case_outcome_out', v, q, beta, is_cost, rslt)
