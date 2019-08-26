@@ -36,16 +36,23 @@ def pre_numba_calculate_p(v, q, lambda_):
     return p
 
 
-def pre_numba_get_worst_case_probs(v, q, beta):
+def pre_numba_get_worst_case_probs(v, q, beta, is_cost=True):
     """This function return the worst case measure."""
     pre_numba_checks('get_worst_case_in', v, q, beta)
 
     if beta == 0.0:
         return q.copy()
 
+    # We can use this function to determine the worst case if we pass in costs or if we pass in
+    # utility.
+    if not is_cost:
+        v_intern = - np.array(v).copy()
+    else:
+        v_intern = np.array(v)
+
     # We scale the value function to avoid too large evaluations of the exponential function in
     # the calculate_p() function.
-    v_scaled = v / max(abs(v))
+    v_scaled = v_intern / max(abs(v_intern))
 
     upper = np.clip((max(v_scaled) - np.matmul(q, v_scaled)) / beta, 2 * EPS_FLOAT, None)
     lower = EPS_FLOAT
@@ -64,12 +71,7 @@ def pre_numba_get_worst_case_outcome(v, q, beta, is_cost=True):
     """This function calculates the worst case outcome."""
     pre_numba_checks('get_worst_case_outcome_in', v, q, beta)
 
-    # We can use this function to determine the worst case if we pass in costs or if we pass in
-    # utility.
-    if not is_cost:
-        v_intern = - np.array(v).copy()
-    else:
-        v_intern = np.array(v)
+
 
     # We want to handle two cases explicitly. First we deal with the case that there is no
     # ambiguity in the transition probabilities. Second, we look at the case where the all mass
@@ -82,39 +84,10 @@ def pre_numba_get_worst_case_outcome(v, q, beta, is_cost=True):
         else:
             return min(v)
 
-    p = pre_numba_get_worst_case_probs(v_intern, q, beta)
+    p = pre_numba_get_worst_case_probs(v, q, beta)
     rslt = np.matmul(p, v)
 
     pre_numba_checks('get_worst_case_outcome_out', v, q, beta, is_cost, rslt)
 
     return rslt
 
-
-def pre_numba_get_exponential_utility(x, gamma):
-    """This function calculates the exponential utility."""
-    return 1.0 / gamma * np.exp(- gamma * x)
-
-
-def pre_numba_get_entropic_risk_measure(v, q, gamma):
-    """This function calculates the entropic risk measure."""
-    if gamma == 0:
-        return -np.matmul(q, v)
-
-    rslt = np.sum(q * np.exp(-gamma * v))
-    rslt = (1.0 / gamma) * np.log(rslt)
-    return rslt
-
-
-def pre_numba_get_multiplier_evaluation(v, q, theta):
-    """This function returns the evaluation based on the multiplier preferences."""
-    def pre_numba_criterion_soft(v, q, gamma, epsilon):
-        crit_val = - pre_numba_get_worst_case_outcome(v, q, epsilon / gamma, is_cost=False) - epsilon
-        return - crit_val
-
-    lower, upper = 0.00, MAX_FLOAT
-
-    criterion = partial(pre_numba_criterion_soft, v, q, theta)
-    rslt = fminbound(criterion, lower, upper,  xtol=EPS_FLOAT, maxfun=MAX_INT, full_output=True)
-    np.testing.assert_equal(rslt[2] == 0, True)
-
-    return rslt[1]
