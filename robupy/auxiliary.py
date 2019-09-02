@@ -50,8 +50,21 @@ def get_worst_case_probs(v, q, beta, is_cost=True):
     """This function return the worst case measure."""
     checks_get_worst_in(v, q, beta)
 
-    if (beta == 0.0) | (len(q) == 1):
+    # We want to handle two cases explicitly. First we deal with the case that there
+    # is no ambiguity in the transition probabilities. Second, we look at the
+    # case where the all mass assigned to the worst-case realization is inside the
+    # feasible set.
+
+    if (beta == 0) | (len(q) == 1):
         return q.copy()
+    elif beta >= np.max(-np.log(q)):
+        p = np.zeros_like(q)
+        if is_cost:
+            p[np.amax(v)] = 1
+            return p
+        else:
+            p[np.amin(v)] = 1
+            return p
 
     # We can use this function to determine the worst case if we pass in costs or if
     # we pass in utility.
@@ -81,19 +94,6 @@ def get_worst_case_probs(v, q, beta, is_cost=True):
 @numba.jit(nopython=True)
 def get_worst_case_outcome(v, q, beta, is_cost=True):
     """This function calculates the worst case outcome."""
-    checks_get_worst_in(v, q, beta)
-
-    # We want to handle two cases explicitly. First we deal with the case that there
-    # is no ambiguity in the transition probabilities. Second, we look at the
-    # case where the all mass assigned to the worst-case realization is inside the
-    # feasible set.
-    if beta == 0:
-        return np.dot(q, v)
-    elif beta >= np.max(-np.log(q)):
-        if is_cost:
-            return np.max(v)
-        else:
-            return np.min(v)
 
     p = get_worst_case_probs(v, q, beta, is_cost=is_cost)
     v_new = np.dot(p, v)
