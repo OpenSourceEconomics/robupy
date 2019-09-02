@@ -22,10 +22,12 @@ def criterion_full(lambda_, v, q, beta):
     """This is the criterion function for ..."""
     checks_criterion_full_in(lambda_)
 
+    v_max = np.max(v / lambda_)
+    v_scaled = v / lambda_ - v_max
     # We want to rule out an infinite logarithm.
-    arg_ = np.maximum(np.sum(q * np.exp(v / lambda_)), EPS_FLOAT)
+    arg_ = np.maximum(np.sum(q * np.exp(v_scaled)), EPS_FLOAT)
 
-    rslt = lambda_ * np.log(arg_) + lambda_ * beta
+    rslt = lambda_ * (np.log(arg_) + v_max) + lambda_ * beta
 
     checks_criterion_full_out(rslt)
 
@@ -80,7 +82,6 @@ def get_worst_case_probs(v, q, beta, is_cost=True):
     x, func_val, status, func_eval = fminbound_numba(
         criterion_full, lower, upper, args=(v_intern, q, beta), xatol=EPS_FLOAT
     )
-    print(x)
     p = calculate_p(v_intern, q, x)
 
     checks_get_worst_case_out(p, q, beta, status)
