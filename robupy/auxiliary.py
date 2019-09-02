@@ -50,7 +50,7 @@ def get_worst_case_probs(v, q, beta, is_cost=True):
     """This function return the worst case measure."""
     checks_get_worst_in(v, q, beta)
 
-    if beta == 0.0:
+    if beta == 0.0 or len(q) == 1:
         return q.copy()
 
     # We can use this function to determine the worst case if we pass in costs or if
