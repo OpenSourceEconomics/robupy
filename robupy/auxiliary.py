@@ -58,7 +58,7 @@ def get_worst_case_probs(v, q, beta, is_cost=True):
     # case where the all mass assigned to the worst-case realization is inside the
     # feasible set.
 
-    if (beta == 0) | (len(q) == 1):
+    if beta == 0 or len(q) == 1:
         return q.copy()
     elif beta >= np.max(-np.log(q)):
         p = np.zeros_like(q)
