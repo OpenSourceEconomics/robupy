@@ -5,10 +5,11 @@ import numpy as np
 import numba
 from scipy.optimize.optimize import fminbound
 from robupy.minimize import fminbound_numba
-from robupy.auxiliary import get_worst_case_outcome, get_worst_case_probs
+from robupy.auxiliary import get_worst_case_outcome, get_worst_case_probs, criterion_full
 from robupy.tests.pre_numba.auxiliary import (
     pre_numba_get_worst_case_outcome,
     pre_numba_get_worst_case_probs,
+    pre_numba_criterion_full
 )
 from robupy.tests.auxiliary import get_request
 
@@ -38,6 +39,13 @@ def test_3():
         fminbound(f_fminbound, lower, upper, full_output=True),
     )
 
+
+def test_4():
+    x, v, q, beta, gamma, is_cost = get_request()
+    assert_array_almost_equal(
+        criterion_full(gamma, v, q, beta),
+        pre_numba_criterion_full(v, q, beta, gamma),
+    )
 
 @numba.jit(nopython=True)
 def f_fminbound(x):
