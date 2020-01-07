@@ -47,6 +47,7 @@ def test_4():
         pre_numba_criterion_full(v, q, beta, gamma),
     )
 
+
 @numba.jit(nopython=True)
 def f_fminbound(x):
     return x ** 2.0
