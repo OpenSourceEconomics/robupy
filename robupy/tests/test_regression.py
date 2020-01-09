@@ -31,9 +31,9 @@ def test_2():
 
 
 def test_3():
-    y = np.random.random() * np.random.randint(1)
-    lower = y - np.random.random() * np.random.randint(1)
-    upper = y + np.random.random() * np.random.randint(1)
+    y = np.random.random() * np.random.randint(100)
+    lower = y - np.random.random() * np.random.randint(100)
+    upper = y + np.random.random() * np.random.randint(100)
     assert_allclose(
         fminbound_numba(f_fminbound, lower, upper),
         fminbound(f_fminbound, lower, upper, full_output=True),
@@ -46,6 +46,7 @@ def test_4():
         criterion_full(gamma, v, q, beta),
         pre_numba_criterion_full(v, q, beta, gamma),
     )
+
 
 @numba.jit(nopython=True)
 def f_fminbound(x):
