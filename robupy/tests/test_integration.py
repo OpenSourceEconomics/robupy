@@ -1,8 +1,8 @@
 import numpy as np
 
-from robupy.auxiliary import get_worst_case_outcome
-from robupy.auxiliary import get_worst_case_probs
-from robupy.tests.auxiliary import get_request
+from robupy.get_worst_case import get_worst_case_outcome
+from robupy.get_worst_case import get_worst_case_probs
+from robupy.tests.get_random_testcase import get_request
 
 
 def test_1():

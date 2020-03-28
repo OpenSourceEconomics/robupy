@@ -2,7 +2,7 @@
 from scipy.stats import entropy
 import numpy as np
 
-from robupy.tests.pre_numba.config import SMALL_FLOAT
+from robupy.tests.resources.pre_numba.config import SMALL_FLOAT
 
 
 def pre_numba_checks(label, *args):

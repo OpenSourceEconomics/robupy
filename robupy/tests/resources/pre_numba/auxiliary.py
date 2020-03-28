@@ -4,10 +4,9 @@ from functools import partial
 from scipy.optimize import fminbound
 import numpy as np
 
-from robupy.tests.pre_numba.config import EPS_FLOAT
-from robupy.tests.pre_numba.config import MAX_FLOAT
-from robupy.tests.pre_numba.config import MAX_INT
-from robupy.tests.pre_numba.checks import pre_numba_checks
+from robupy.tests.resources.pre_numba.config import EPS_FLOAT
+from robupy.tests.resources.pre_numba.config import MAX_FLOAT
+from robupy.tests.resources.pre_numba.checks import pre_numba_checks
 
 
 def pre_numba_criterion_full(v, q, beta, lambda_):

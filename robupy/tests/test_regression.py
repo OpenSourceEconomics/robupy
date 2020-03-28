@@ -4,14 +4,14 @@ from numpy.testing import assert_array_almost_equal, assert_allclose
 import numpy as np
 import numba
 from scipy.optimize.optimize import fminbound
-from robupy.minimize import fminbound_numba
-from robupy.auxiliary import get_worst_case_outcome, get_worst_case_probs, criterion_full
-from robupy.tests.pre_numba.auxiliary import (
+from robupy.minimize_scalar import fminbound_numba
+from robupy.get_worst_case import get_worst_case_outcome, get_worst_case_probs, criterion_full
+from robupy.tests.resources.pre_numba.auxiliary import (
     pre_numba_get_worst_case_outcome,
     pre_numba_get_worst_case_probs,
     pre_numba_criterion_full
 )
-from robupy.tests.auxiliary import get_request
+from robupy.tests.get_random_testcase import get_request
 
 
 def test_1():

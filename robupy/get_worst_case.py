@@ -1,6 +1,6 @@
 """This module contains auxiliary functions for the robust optimization problem."""
 
-from robupy.minimize import fminbound_numba
+from robupy.minimize_scalar import fminbound_numba
 import numpy as np
 import numba
 
