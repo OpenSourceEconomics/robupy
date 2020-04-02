@@ -3,9 +3,7 @@ from setuptools import setup
 
 # Package meta-data.
 NAME = "robupy"
-DESCRIPTION = (
-    ""
-)
+DESCRIPTION = ""
 URL = ""
 EMAIL = ""
 AUTHOR = ""
