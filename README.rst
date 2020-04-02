@@ -35,5 +35,5 @@ If you use robupy for your research, do not forget to cite it with
             Author = {The robupy team},
             Title  = {robupy - A {P}ython package for robust optimization},
             Year   = {2019},
-            Url    = {http://doi.org/10.5281/zenodo.3457403},
+            Url    = {https://github.com/OpenSourceEconomics/robupy},
     }
