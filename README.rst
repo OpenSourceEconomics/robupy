@@ -9,6 +9,9 @@ robupy
 .. image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :target: https://opensource.org/licenses/MIT
 
+.. image:: https://github.com/OpenSourceEconomics/robupy/workflows/Continuous%20Integration%20Workflow/badge.svg
+    :target: https://github.com/OpenSourceEconomics/robupy/actions
+
 .. image:: https://zenodo.org/badge/156177030.svg
     :target: https://zenodo.org/badge/latestdoi/156177030
 
