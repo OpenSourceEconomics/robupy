@@ -1,5 +1,13 @@
 robupy
 ======
+.. image:: https://anaconda.org/opensourceeconomics/robupy/badges/version.svg
+    :target: https://anaconda.org/OpenSourceEconomics/robupy
+
+.. image:: https://readthedocs.org/projects/robupy/badge/?version=latest
+    :target: https://robupy.readthedocs.io/en/latest/?badge=latest
+
+.. image:: https://img.shields.io/badge/License-MIT-yellow.svg
+    :target: https://opensource.org/licenses/MIT
 
 .. image:: https://zenodo.org/badge/156177030.svg
     :target: https://zenodo.org/badge/latestdoi/156177030
