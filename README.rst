@@ -10,7 +10,7 @@ selection to a one-dimensional minimization problem. This algorithm was develope
 described in:
 
     Nilim, A., \& El Ghaoui, L. (2005). `Robust control of Markov decision processes
-    with uncertain transition matrices. <https://doi.org/10.2307/2109768>`_.
+    with uncertain transition matrices. <https://doi.org/10.1287/opre.1050.0216>`_.
     *Operations Research*, 53(5):  780–798.
 
 You can install ``robupy`` via conda with
