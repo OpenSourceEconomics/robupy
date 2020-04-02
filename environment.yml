@@ -1,9 +1,12 @@
 name: robupy
 
 dependencies:
-  - python=3.6
+  - python=3.7
   - numpy
   - pandas
+  - anaconda-client
+  - conda-build
+  - conda-verify
   - statsmodels
   - pytest
   - pytest-xdist
