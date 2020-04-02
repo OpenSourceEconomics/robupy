@@ -7,6 +7,7 @@ dependencies:
   - statsmodels
   - pytest
   - pytest-xdist
+  - pytest-cov
   - scipy
   - flake8
   - numba
