@@ -29,11 +29,11 @@ jobs:
         shell: bash -l {0}
         run: pytest --cov-report=xml --cov=./
 
-#      - name: Upload coverage report.
-#        if: runner.os == 'Linux' && matrix.python-version == '3.7'
-#        uses: codecov/codecov-action@v1
-#        with:
-#          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage report.
+        if: runner.os == 'Linux' && matrix.python-version == '3.7'
+        uses: codecov/codecov-action@v1
+        with:
+          token: 199bca1b-7f11-4b59-9977-122dd4ca31ba
 
       - name: Run pre-commits.
         shell: bash -l {0}
