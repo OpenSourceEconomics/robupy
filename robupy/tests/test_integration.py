@@ -18,7 +18,7 @@ def test_3():
     uncertainty set."""
     _, v, q, beta, _, is_cost = get_request()
 
-    rslt = list()
+    rslt = []
     for beta in np.linspace(0.0, 10):
         rslt.append(get_worst_case_outcome(v, q, beta, is_cost))
 
