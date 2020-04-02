@@ -17,6 +17,7 @@ dependencies:
   - pytest-cov
   - pre-commit
   - scipy
+  - sphinx
   - flake8
   - numba
   - pip
