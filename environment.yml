@@ -1,5 +1,9 @@
 name: robupy
 
+channels:
+  - opensourceeconomics
+  - conda-forge
+
 dependencies:
   - python=3.7
   - numpy
