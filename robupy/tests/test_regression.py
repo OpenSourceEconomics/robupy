@@ -1,17 +1,18 @@
 """This module contains the regression tests."""
-
-from numpy.testing import assert_array_almost_equal, assert_allclose
-import numpy as np
 import numba
+import numpy as np
+from numpy.testing import assert_allclose
+from numpy.testing import assert_array_almost_equal
 from scipy.optimize.optimize import fminbound
+
+from robupy.get_worst_case import criterion_full
+from robupy.get_worst_case import get_worst_case_outcome
+from robupy.get_worst_case import get_worst_case_probs
 from robupy.minimize_scalar import fminbound_numba
-from robupy.get_worst_case import get_worst_case_outcome, get_worst_case_probs, criterion_full
-from robupy.tests.resources.pre_numba.auxiliary import (
-    pre_numba_get_worst_case_outcome,
-    pre_numba_get_worst_case_probs,
-    pre_numba_criterion_full
-)
 from robupy.tests.get_random_testcase import get_request
+from robupy.tests.resources.pre_numba.auxiliary import pre_numba_criterion_full
+from robupy.tests.resources.pre_numba.auxiliary import pre_numba_get_worst_case_outcome
+from robupy.tests.resources.pre_numba.auxiliary import pre_numba_get_worst_case_probs
 
 
 def test_1():
@@ -43,8 +44,7 @@ def test_3():
 def test_4():
     x, v, q, beta, gamma, is_cost = get_request()
     assert_array_almost_equal(
-        criterion_full(gamma, v, q, beta),
-        pre_numba_criterion_full(v, q, beta, gamma),
+        criterion_full(gamma, v, q, beta), pre_numba_criterion_full(v, q, beta, gamma),
     )
 
 

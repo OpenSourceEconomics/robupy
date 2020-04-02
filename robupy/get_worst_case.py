@@ -1,20 +1,17 @@
 """This module contains auxiliary functions for the robust optimization problem."""
-
-from robupy.minimize_scalar import fminbound_numba
-import numpy as np
 import numba
+import numpy as np
 
+from robupy.checks import checks_calculate_p_in
+from robupy.checks import checks_calculate_p_out
+from robupy.checks import checks_criterion_full_in
+from robupy.checks import checks_criterion_full_out
+from robupy.checks import checks_get_worst_case_out
+from robupy.checks import checks_get_worst_case_outcome_out
+from robupy.checks import checks_get_worst_in
 from robupy.config import EPS_FLOAT
 from robupy.config import MAX_FLOAT
-from robupy.checks import (
-    checks_criterion_full_in,
-    checks_criterion_full_out,
-    checks_calculate_p_in,
-    checks_calculate_p_out,
-    checks_get_worst_in,
-    checks_get_worst_case_outcome_out,
-    checks_get_worst_case_out,
-)
+from robupy.minimize_scalar import fminbound_numba
 
 
 @numba.jit(nopython=True)

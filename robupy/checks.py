@@ -1,6 +1,6 @@
 """This module contains all checks for the package to improve readability."""
-import numpy as np
 import numba
+import numpy as np
 
 from robupy.config import SMALL_FLOAT
 
