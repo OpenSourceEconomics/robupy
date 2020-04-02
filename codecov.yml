@@ -11,4 +11,4 @@ coverage:
 ignore:
   - ".tox/**/*"
   - "setup.py"
-  - "respy/tests/**/*"
+  - "robupy/tests/**/*"
