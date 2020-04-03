@@ -49,8 +49,8 @@ If you use robupy for your research, do not forget to cite it with
 .. code-block::
 
     @Unpublished{The robupy team,
-            Author = {The robupy team},
-            Title  = {robupy - A {P}ython package for robust optimization},
-            Year   = {2019},
-            Url    = {https://github.com/OpenSourceEconomics/robupy},
-    }
+        Author = {The robupy team},
+        Title  = {robupy - A {P}ython package for robust optimization},
+        Year   = {2019},
+        Url    = {https://github.com/OpenSourceEconomics/robupy},
+        }
