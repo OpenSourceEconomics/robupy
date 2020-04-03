@@ -7,6 +7,10 @@ Welcome to robupy's documentation!
 ==================================
 .. include:: ../../README.rst
 
+
+Credits
+-------
+
 BDFL
 ^^^^
 
