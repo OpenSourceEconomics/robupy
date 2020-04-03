@@ -46,7 +46,7 @@ Citation
 
 If you use robupy for your research, do not forget to cite it with
 
-.. code-block::
+.. code-block:: bash
 
     @Unpublished{The robupy team,
         Author = {The robupy team},
