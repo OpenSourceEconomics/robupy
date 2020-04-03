@@ -50,7 +50,7 @@ If you use robupy for your research, do not forget to cite it with
 
     @Unpublished{The robupy team,
         Author = {The robupy team},
-        Title  = {robupy - A {P}ython package for robust optimization},
+        Title  = {robupy - A Python package for robust optimization},
         Year   = {2019},
         Url    = {https://github.com/OpenSourceEconomics/robupy},
         }
