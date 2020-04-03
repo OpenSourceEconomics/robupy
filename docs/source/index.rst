@@ -6,3 +6,14 @@
 Welcome to robupy's documentation!
 ==================================
 .. include:: ../../README.rst
+
+BDFL
+^^^^
+
+`Philipp Eisenhauer <https://github.com/peisenha>`_
+
+
+Development Lead
+^^^^^^^^^^^^^^^^
+
+`Maximilian Blesch <https://github.com/MaxBlesch>`_
