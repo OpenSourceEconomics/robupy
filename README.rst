@@ -3,6 +3,9 @@ robupy
 .. image:: https://anaconda.org/opensourceeconomics/robupy/badges/version.svg
     :target: https://anaconda.org/OpenSourceEconomics/robupy
 
+.. image:: https://anaconda.org/opensourceeconomics/robupy/badges/platforms.svg
+    :target: https://anaconda.org/OpenSourceEconomics/robupy
+
 .. image:: https://readthedocs.org/projects/robupy/badge/?version=latest
     :target: https://robupy.readthedocs.io/en/latest/?badge=latest
 
