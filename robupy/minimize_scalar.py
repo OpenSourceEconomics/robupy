@@ -43,15 +43,18 @@ def fminbound_numba(func, lower, upper, args=(), xatol=1e-5, maxfun=500):
             e = rat
 
             # Check for acceptability of parabola
-            if ((np.abs(p) < np.abs(0.5*q*r)) and (p > q*(a - xf)) and
-                    (p < q * (b - xf))):
+            if (
+                (np.abs(p) < np.abs(0.5 * q * r))
+                and (p > q * (a - xf))
+                and (p < q * (b - xf))
+            ):
                 rat = (p + 0.0) / q
                 x = xf + rat
 
                 if ((x - a) < tol2) or ((b - x) < tol2):
                     si = np.sign(xm - xf) + ((xm - xf) == 0)
                     rat = tol1 * si
-            else:      # do a golden section step
+            else:  # do a golden section step
                 golden = 1
 
         if golden:  # Do a golden-section step
@@ -96,4 +99,3 @@ def fminbound_numba(func, lower, upper, args=(), xatol=1e-5, maxfun=500):
 
     fval = fx
     return xf, fval, flag, num
-

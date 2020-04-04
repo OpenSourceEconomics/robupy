@@ -1,5 +1,6 @@
-import numpy as np
 import os
+
+import numpy as np
 
 PACKAGE_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -9,4 +10,3 @@ SMALL_FLOAT = 1.0e-6
 HUGE_FLOAT = 1e250
 
 MAX_INT = np.iinfo(1).max
-
