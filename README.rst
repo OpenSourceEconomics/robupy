@@ -15,6 +15,9 @@ robupy
 .. image:: https://github.com/OpenSourceEconomics/robupy/workflows/Continuous%20Integration%20Workflow/badge.svg
     :target: https://github.com/OpenSourceEconomics/robupy/actions
 
+.. image:: https://codecov.io/gh/OpenSourceEconomics/robupy/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/OpenSourceEconomics/robupy
+
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 
@@ -24,7 +27,7 @@ selection to a one-dimensional minimization problem. This algorithm was develope
 described in:
 
     Nilim, A., \& El Ghaoui, L. (2005). `Robust control of Markov decision processes
-    with uncertain transition matrices. <https://doi.org/10.1287/opre.1050.0216>`_.
+    with uncertain transition matrices <https://doi.org/10.1287/opre.1050.0216>`_.
     *Operations Research*, 53(5):  780–798.
 
 You can install ``robupy`` via conda with
