@@ -3,15 +3,15 @@ from setuptools import setup
 
 # Package meta-data.
 NAME = "robupy"
-DESCRIPTION = ""
-URL = ""
+DESCRIPTION = "An open-source package for robust optimization."
+URL = "https://robupy.readthedocs.io/en/latest/"
 EMAIL = ""
-AUTHOR = ""
+AUTHOR = "Maximilian Blesch & Philipp Eisenhauer"
 
 
 setup(
     name=NAME,
-    version="0.1.0",
+    version="1.1",
     description=DESCRIPTION,
     author=AUTHOR,
     author_email=EMAIL,
