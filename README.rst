@@ -21,6 +21,7 @@ robupy
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 
+
 ``robupy``  is an open-source Python package for finding worst-case probabilites in
 the context of robust decision making. It implements an algorithm, which reduces the
 selection to a one-dimensional minimization problem. This algorithm was developed and
