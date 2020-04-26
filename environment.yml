@@ -10,7 +10,6 @@ dependencies:
   - anaconda-client
   - conda-build
   - conda-verify
-  - statsmodels
   - pytest
   - pytest-xdist
   - pytest-cov
