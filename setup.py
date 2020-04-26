@@ -11,7 +11,7 @@ AUTHOR = "Maximilian Blesch & Philipp Eisenhauer"
 
 setup(
     name=NAME,
-    version="1.1",
+    version="1.1.1",
     description=DESCRIPTION,
     author=AUTHOR,
     author_email=EMAIL,

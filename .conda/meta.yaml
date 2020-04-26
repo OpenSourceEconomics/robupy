@@ -18,10 +18,8 @@ requirements:
     - python >=3.6,<3.8
   run:
     - python >=3.6,<3.8
-    - statsmodels
     - numba >=0.42
     - numpy
-    - pandas >=0.24
     - pytest
     - pytest-xdist
     - scipy
