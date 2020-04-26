@@ -7,7 +7,6 @@ channels:
 dependencies:
   - python=3.7
   - numpy
-  - pandas
   - anaconda-client
   - conda-build
   - conda-verify
