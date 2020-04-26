@@ -1,6 +1,6 @@
 robupy
 ======
-.. image:: https://anaconda .org/opensourceeconomics/robupy/badges/version.svg
+.. image:: https://anaconda.org/opensourceeconomics/robupy/badges/version.svg
     :target: https://anaconda.org/OpenSourceEconomics/robupy
 
 .. image:: https://anaconda.org/opensourceeconomics/robupy/badges/platforms.svg
