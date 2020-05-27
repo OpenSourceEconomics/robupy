@@ -10,3 +10,20 @@ def test_1():
 
     get_worst_case_probs(v, q, beta, is_cost)
 
+
+def test_3():
+    """This test ensures that the worst-case is increasing with the size of the
+    uncertainty set."""
+    _, v, q, beta, _, is_cost = get_request()
+
+    rslt = []
+    for beta in np.linspace(0.0, 10):
+        worst_probs = get_worst_case_probs(v, q, beta, is_cost)
+        rslt.append(np.dot(worst_probs, v))
+
+    if is_cost:
+        cond = np.all(np.diff(np.around(rslt, 5)) >= 0)
+    else:
+        cond = np.all(np.diff(np.around(rslt, 5)) <= 0)
+
+    np.testing.assert_equal(cond, True)
