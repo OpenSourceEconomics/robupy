@@ -38,8 +38,7 @@ def test_4():
     # else:
     #     v_max_min = np.max(v)
     assert_array_almost_equal(
-        criterion_full(gamma, v, q, beta), pre_numba_criterion_full(v, q,
-                                                                               beta, gamma),
+        criterion_full(gamma, v, q, beta), pre_numba_criterion_full(v, q, beta, gamma),
     )
 
 
