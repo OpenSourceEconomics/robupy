@@ -11,7 +11,8 @@ from robupy.minimize_scalar import fminbound_numba
 
 @numba.jit(nopython=True)
 def criterion_full(lambda_, v, v_max, q, beta):
-    """This is the criterion function for ..."""
+    """This is the criterion function for solving the inner problem of Nilim and El
+    Ghaoui (2003). It corresponds to equation (47) in the paper."""
 
     v_scaled = (v - v_max) / lambda_
     # We want to rule out an infinite logarithm.
@@ -24,7 +25,8 @@ def criterion_full(lambda_, v, v_max, q, beta):
 
 @numba.jit(nopython=True)
 def calculate_p(v, q, lambda_):
-    """This function return the optimal ..."""
+    """This function yields a closed form solution for the worst case distribution,
+    given the solution to the inner problem lambda."""
 
     v_intern = v / lambda_ - np.max(v / lambda_)
     p = q * np.minimum(np.exp(v_intern), MAX_FLOAT)
@@ -35,7 +37,7 @@ def calculate_p(v, q, lambda_):
 
 @numba.jit(nopython=True)
 def get_worst_case_probs(v, q, beta, is_cost=True):
-    """This function return the worst case measure."""
+    """This function returns the worst distribution."""
     checks_get_worst_in(v, q, beta)
 
     # We want to handle two cases explicitly. First we deal with the case that there
@@ -62,6 +64,7 @@ def get_worst_case_probs(v, q, beta, is_cost=True):
         v_intern = v
 
     v_max = np.max(v_intern)
+
     upper = np.maximum((v_max - np.dot(q, v_intern)) / beta, 2 * EPS_FLOAT)
     lower = EPS_FLOAT
 
