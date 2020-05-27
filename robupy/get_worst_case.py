@@ -2,12 +2,7 @@
 import numba
 import numpy as np
 
-from robupy.checks import checks_calculate_p_in
-from robupy.checks import checks_calculate_p_out
-from robupy.checks import checks_criterion_full_in
-from robupy.checks import checks_criterion_full_out
 from robupy.checks import checks_get_worst_case_out
-from robupy.checks import checks_get_worst_case_outcome_out
 from robupy.checks import checks_get_worst_in
 from robupy.config import EPS_FLOAT
 from robupy.config import MAX_FLOAT
@@ -17,7 +12,6 @@ from robupy.minimize_scalar import fminbound_numba
 @numba.jit(nopython=True)
 def criterion_full(lambda_, v, q, beta):
     """This is the criterion function for ..."""
-    checks_criterion_full_in(lambda_)
 
     v_max = np.max(v / lambda_)
     v_scaled = v / lambda_ - v_max
@@ -26,21 +20,16 @@ def criterion_full(lambda_, v, q, beta):
 
     rslt = lambda_ * (np.log(arg_) + v_max) + lambda_ * beta
 
-    checks_criterion_full_out(rslt)
-
     return rslt
 
 
 @numba.jit(nopython=True)
 def calculate_p(v, q, lambda_):
     """This function return the optimal ..."""
-    checks_calculate_p_in(v, q, lambda_)
 
     v_intern = v / lambda_ - np.max(v / lambda_)
     p = q * np.minimum(np.exp(v_intern), MAX_FLOAT)
     p = p / np.sum(p)
-
-    checks_calculate_p_out(p)
 
     return p
 
@@ -55,9 +44,9 @@ def get_worst_case_probs(v, q, beta, is_cost=True):
     # case where the all mass assigned to the worst-case realization is inside the
     # feasible set.
 
-    if beta == 0 or len(q) == 1:
+    if beta == 0:
         return q.copy()
-    elif beta >= np.max(-np.log(q)):
+    elif beta >= -np.log(np.min(q)):
         p = np.zeros_like(q)
         if is_cost:
             p[np.argmax(v)] = 1
@@ -84,15 +73,3 @@ def get_worst_case_probs(v, q, beta, is_cost=True):
     checks_get_worst_case_out(p, q, beta, status)
 
     return p
-
-
-@numba.jit(nopython=True)
-def get_worst_case_outcome(v, q, beta, is_cost=True):
-    """This function calculates the worst case outcome."""
-
-    p = get_worst_case_probs(v, q, beta, is_cost=is_cost)
-    v_new = np.dot(p, v)
-
-    checks_get_worst_case_outcome_out(v, v_new)
-
-    return v_new
