@@ -33,12 +33,13 @@ def test_3():
 
 def test_4():
     x, v, q, beta, gamma, is_cost = get_request()
-    # if is_cost:
-    #     v_max_min = np.min(v)
-    # else:
-    #     v_max_min = np.max(v)
+    if is_cost:
+        v_max_min = np.min(v)
+    else:
+        v_max_min = np.max(v)
     assert_array_almost_equal(
-        criterion_full(gamma, v, q, beta), pre_numba_criterion_full(v, q, beta, gamma),
+        criterion_full(gamma, v, v_max_min, q, beta),
+        pre_numba_criterion_full(v, q, beta, gamma),
     )
 
 
