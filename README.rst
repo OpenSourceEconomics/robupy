@@ -15,17 +15,18 @@ robupy
 .. image:: https://github.com/OpenSourceEconomics/robupy/workflows/Continuous%20Integration%20Workflow/badge.svg
     :target: https://github.com/OpenSourceEconomics/robupy/actions
 
-.. image:: https://codecov.io/gh/OpenSourceEconomics/robupy/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/OpenSourceEconomics/robupy
-
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 
 
-``robupy``  is an open-source Python package for finding worst-case probabilites in
-the context of robust decision making. It implements an algorithm, which reduces the
-selection to a one-dimensional minimization problem. This algorithm was developed and
-described in:
+``robupy``  is an open-source Python package for finding worst-case probabilities in
+the context of robust decision making. It aims to collect algorithms, which find for
+different construction methods for the ambiguity set, the worst-case distribution as
+fast as possible.
+
+The first algorithm implemented, applies to an ambiguity set constructed with the
+Kullback-Leibler divergence function. It reduces the selection to a one-dimensional
+minimization problem. This algorithm was developed and described in:
 
     Nilim, A., \& El Ghaoui, L. (2005). `Robust control of Markov decision processes
     with uncertain transition matrices <https://doi.org/10.1287/opre.1050.0216>`_.
