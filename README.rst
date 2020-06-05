@@ -15,9 +15,6 @@ robupy
 .. image:: https://github.com/OpenSourceEconomics/robupy/workflows/Continuous%20Integration%20Workflow/badge.svg
     :target: https://github.com/OpenSourceEconomics/robupy/actions
 
-.. image:: https://codecov.io/gh/OpenSourceEconomics/robupy/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/OpenSourceEconomics/robupy
-
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
 
