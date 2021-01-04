@@ -50,9 +50,9 @@ If you use robupy for your research, do not forget to cite it with
 
 .. code-block:: bash
 
-    @Unpublished{The robupy team,
-        Author = {The robupy team},
-        Title  = {robupy - A Python package for robust optimization},
-        Year   = {2019},
-        Url    = {https://github.com/OpenSourceEconomics/robupy},
+    @Unpublished{robupy.2020,
+          author = {{robupy}},
+          title  = {A {P}ython package for robust optimization},
+          year   = {2020},
+          url    = {https://github.com/OpenSourceEconomics/robupy/releases/1.1.1},
         }
