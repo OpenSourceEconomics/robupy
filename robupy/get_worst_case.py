@@ -37,7 +37,11 @@ def calculate_p(v, q, lambda_):
 
 @numba.jit(nopython=True)
 def get_worst_case_probs(v, q, beta, is_cost=True):
-    """This function returns the worst distribution."""
+    """This function returns the worst distribution. Nilim and Gahoui (2005) provide
+    the algortihm implemented here. However their objective is to minimize costs.
+    Therefore their algorithm determines the probability maximizing the costs. The
+    is_cost keyword is therefore specified by default true. If you submit utility (
+    positive for reward, negatice for costs) this keyword has to be set false."""
     checks_get_worst_in(v, q, beta)
 
     # We want to handle two cases explicitly. First we deal with the case that there
